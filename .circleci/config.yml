@@ -8,17 +8,6 @@ jobs:
     executor: android/android
     steps:
       - checkout
-      - run:
-          name: Import GPG key for Google Cloud SDK
-          command: |
-            sudo apt-get update
-            sudo apt-get install -y gnupg2
-            curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key --keyring /usr/share/keyrings/cloud.google.gpg add -
-      - run:
-          name: Install OpenJDK 17
-          command: |
-            sudo apt-get update
-            sudo apt-get install -y openjdk-17-jdk
       - restore_cache:
           key: android-orb-v1-
       - run:
