@@ -13,10 +13,8 @@ jobs:
       - run:
           name: Install OpenJDK 17
           command: |
-            sdkman_auto_answer=true curl -s "https://get.sdkman.io" | bash
-            source "$HOME/.sdkman/bin/sdkman-init.sh"
-            sdk install java 17.0.1-open
-            sdk default java 17.0.1-open
+            sudo apt-get update
+            sudo apt-get install -y openjdk-17-jdk
       - restore_cache:
           key: android-orb-v1-
       - run:
