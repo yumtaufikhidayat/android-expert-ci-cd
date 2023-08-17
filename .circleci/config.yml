@@ -5,16 +5,18 @@ orbs:
  
 jobs:
   build:
+    docker:
+      - image: circleci/openjdk:17-jdk
     executor: android/android
     steps:
       - checkout
       - run:
           name: Install OpenJDK 17
           command: |
-            sudo apt-get update && sudo apt-get install openjdk-17-jdk
-            sudo update-alternatives --set java /usr/lib/jvm/java-17-openjdk-amd64/bin/java
-            sudo update-alternatives --set javac /usr/lib/jvm/java-17-openjdk-amd64/bin/javac
-            java -version
+            sdkman_auto_answer=true curl -s "https://get.sdkman.io" | bash
+            source "$HOME/.sdkman/bin/sdkman-init.sh"
+            sdk install java 17.0.1-open
+            sdk default java 17.0.1-open
       - restore_cache:
           key: android-orb-v1-
       - run:
